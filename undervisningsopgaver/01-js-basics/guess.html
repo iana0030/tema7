@@ -14,24 +14,22 @@
     <button>Se om det er rigtigt</button>
 
     <script>
-        let ran = Math.round(Math.random() * 21);
-        let antalKlik = 0;
+        let ran = Math.round(Math.random() * 20);
+        let klik = 0;
         document.querySelector("button").addEventListener("click", buttonKlik);
 
         function buttonKlik() {
             let tal = document.querySelector("#tal").value;
-            antalKlik++;
+            klik++;
 
             function guessNumber(l, b) {
-                if (tal == ran) {
-                    console.log(`Det var rigtigt! Jeg tænkte på ${ran}.`);
-                } else if (tal < ran) {
+                if (tal < ran) {
                     console.log(`Desværre, det var for lavt. Prøv igen.`);
                 } else if (tal > ran) {
                     console.log(`Desværre, det var for højt. Prøv igen.`);
-                } else if (tal == ran) {
+                } else {
                     console.log(`Det var rigtigt! Jeg tænkte på ${ran}.`);
-                    console.log(`Du gættede ${antalKlik} gange`);
+                    console.log(`Du gættede ${klik} gange`);
                 }
             }
             let resultat = guessNumber();
