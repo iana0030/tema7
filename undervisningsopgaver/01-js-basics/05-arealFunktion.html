@@ -26,6 +26,8 @@
                 let a = (l * b);
                 if (a == 0) {
                     return (`Husk længde og bredde skal være gyldige tal. \n Prøv igen`);
+                } else if (isNaN(a)) {
+                    return (`Fejl. \nPrøv igen med tal`);
                 } else {
                     return (`Arealet er ${a}. \nVil du beregne et nyt areal?`);
                 }
