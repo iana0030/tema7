@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        body {
+            color: #c6405f;
+        }
+
+        #display {
+            width: 20vw;
+            height: 20vw;
+            // border: 1px dotted silver;
+            margin: 7vw;
+            padding: 1vw;
+        }
+
+    </style>
+</head>
+
+<body>
+    <ul id="display"></ul>
+    <script>
+        let sange = ["WUJI", "CUT", "I need somebody", "My Pace", "Deja Vu", "Something", "FACE", "Ghost City Tokyo", "She is", "Kyouran Hey Kids!!"];
+        sange.forEach((sang, index) => {
+            document.querySelector("#display").innerHTML += index + " " + `${sang} <br>`;
+            console.log(sang, index);
+        })
+
+    </script>
+</body>
+
+</html>
