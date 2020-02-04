@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <p>Regn ud of din date er for ung eller for gammel for dig. Der findes nemlig en regel, som hedder “half your age plus seven”</p>
+    <p>Indtast din alder:</p>
+    <input type="text" id="bruger_alder">
+    <p>Indtast din dates alder:</p>
+    <input type="text" id="date_alder">
+    <button>Find ud af om reglen er overholdt</button>
+    <p id="txt"></p>
+
+    <script>
+        let brugerAlder = document.querySelector("#bruger_alder").value;
+        let dateAlder = document.querySelector("#date_alder").value;
+        let regel = brugerAlder / 2 + 7;
+
+        document.querySelector("button").addEventListener("click", buttonKlik);
+
+        function buttonKlik() {
+
+            function getRule() {
+                if (brugerAlder <= 15 && dateAlder <= 15) {
+                    alert("Hov! I skal begge være over 15! Den går ikke");
+                }
+
+                if (dateAlder == regel) {
+                    console.log(`Reglen er overholdt.`);
+                } else if (dateAlder <= regel) {
+                    console.log(`Reglen er ikke overholdt`);
+                } else if (dateAlder >= regel) {
+                    console.log(`Reglen er ikke overholdt`);
+                }
+            }
+            let resultat = getRule();
+            //?????????????????????
+        }
+
+    </script>
+</body>
+
+</html>
