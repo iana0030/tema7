@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>A</title>
+    <style>
+        #box,
+        #bax {
+            width: 200px;
+            height: 200px;
+            background-color: wheat;
+            padding: 20px;
+            margin: 10px;
+        }
+
+        button {
+            font-size: 2rem;
+            margin: 10px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <button id="klik">
+        klik
+    </button>
+    <button id="slet">
+        slet
+    </button>
+    <button id="html">
+        html
+    </button>
+    <button id="flyt">
+        flyt
+    </button>
+    <div id="box"></div>
+    <div id="bax"></div>
+
+    <script>
+        const box = document.querySelector("#box");
+        const bax = document.querySelector("#bax");
+
+        document.querySelector("#klik").addEventListener("click", () => {
+            box.textContent = "KLIK";
+        })
+
+        document.querySelector("#slet").addEventListener("click", () => {
+            box.textContent = "";
+            bax.textContent = "";
+        })
+
+        document.querySelector("#html").addEventListener("click", () => {
+            box.innerHTML = "<h2>Hej</h2>";
+            let p = document.createElement("p");
+            let text = document.createTextNode("Jeg er en box");
+            p.appendChild(text);
+            box.appendChild(p);
+        })
+
+        document.querySelector("#flyt").addEventListener("click", () => {
+            box.textContent = "";
+            bax.innerHTML = "<h2>Hej</h2>";
+            let p = document.createElement("p");
+            let text = document.createTextNode("Jeg er en box");
+            p.appendChild(text);
+            bax.appendChild(p);
+        })
+
+    </script>
+</body>
+
+</html>
