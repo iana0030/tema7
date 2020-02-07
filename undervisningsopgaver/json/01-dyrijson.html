@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="¨da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+
+<body>
+
+    <section class="data-container"></section>
+    <template>
+        <article id="dyret">
+            <h3></h3>
+            <img src="" alt="">
+            <p id="type">Type: </p>
+            <p id="levested">Levested: </p>
+        </article>
+    </template>
+
+
+    <script>
+        let alleDyr = [];
+
+        document.addEventListener("DOMContentLoaded", start);
+        console.log("load");
+
+        function start() {
+            console.log("start");
+            hentData();
+        }
+
+        async function hentData() {
+            console.log("hentData");
+            const response = await fetch("alledyr.json");
+            console.log(response);
+            alleDyr = await response.json();
+            console.log(alleDyr);
+            visDyr();
+        }
+
+        function visDyr() {
+            const container = document.querySelector(".data-container");
+            const dyreTemplate = document.querySelector("template");
+
+            alleDyr.forEach(dyr => {
+                let klon = dyreTemplate.cloneNode(true).content;
+                klon.querySelector("#dyret").style.border = "2px solid black";
+                klon.querySelector("#dyret").style.margin = "2vw";
+                klon.querySelector("#dyret").style.padding = "1vw";
+                klon.querySelector("h3").textContent = dyr.navn;
+                klon.querySelector("img").src = dyr.billede;
+                klon.querySelector("#type").textContent += dyr.type;
+                klon.querySelector("#levested").textContent += dyr.levested;
+                container.appendChild(klon)
+            })
+
+        }
+
+    </script>
+</body>
+
+</html>
