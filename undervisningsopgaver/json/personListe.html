@@ -18,15 +18,19 @@
             max-width: 1000px;
             margin: 0 auto;
             padding: 10px;
-            background: #ececec;
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             grid-gap: 10px;
         }
 
         article {
-            border: 1px solid #000;
+            border: 2px dashed #d4b1b1;
             padding: 10px;
+            background: #e6f1f2;
+        }
+
+        article:nth-child(odd) {
+            background: #e6e8f2;
         }
 
 
