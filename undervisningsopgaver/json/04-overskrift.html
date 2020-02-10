@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="¨da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persongalleri</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 10px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-gap: 10px;
+        }
+
+        article {
+            border: 2px dashed #d4b1b1;
+            padding: 10px;
+            background: #e6f1f2;
+        }
+
+        article:nth-child(odd) {
+            background: #e6e8f2;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+        }
+
+        button {
+            margin: 10px;
+        }
+
+        .valgt {
+            background-color: grey;
+            color: white;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <h1>Alle</h1>
+    <nav>
+        <button class="filter valgt" data-køn="alle">Alle</button>
+        <button class="filter" data-køn="m">Mænd</button>
+        <button class="filter" data-køn="k">Kvinder</button>
+        <button class="filter" data-køn="andet">Andet</button>
+    </nav>
+
+
+    <section class="data-container"></section>
+    <template>
+        <article id="personer">
+            <h3></h3>
+            <img src="" alt="">
+            <p id="alder">Alder: </p>
+            <p id="sex">Køn: </p>
+            <p id="job">Job: </p>
+            <p id="hobby">Hobby: </p>
+            <p id="pet">Kæledyr: </p>
+        </article>
+    </template>
+
+
+    <script>
+        let allePersoner = [];
+        const endpoint = "https://spreadsheets.google.com/feeds/list/1XWWbfWszD7f4jHqp51V_oT3pkHuR-ceEUw4YtrvK7F0/od6/public/values?alt=json";
+        let filter = "alle";
+
+        document.addEventListener("DOMContentLoaded", start);
+        console.log("load");
+
+        function start() {
+            console.log("start");
+            hentData();
+            addListenersToButtons();
+        }
+
+        async function hentData() {
+            console.log("hentData");
+            const response = await fetch(endpoint);
+            // console.log(response);
+            allePersoner = await response.json();
+            // console.log(allePersoner);
+            visPerson();
+        }
+
+
+        function visPerson() {
+            const container = document.querySelector(".data-container");
+            const personTemplate = document.querySelector("template");
+            container.innerHTML = "";
+
+            allePersoner.feed.entry.forEach(person => {
+                if (filter == "alle" || filter == person.gsx$sex.$t) {
+
+                    let klon = personTemplate.cloneNode(true).content;
+                    let navn = `${person.gsx$navn.$t} ${person.gsx$efternavn.$t}`;
+
+                    klon.querySelector("h3").textContent = navn;
+                    klon.querySelector("img").src = person.gsx$billede.$t;
+                    klon.querySelector("#alder").textContent += person.gsx$alder.$t;
+                    klon.querySelector("#sex").textContent += person.gsx$sex.$t;
+                    klon.querySelector("#job").textContent += person.gsx$job.$t;
+                    klon.querySelector("#hobby").textContent += person.gsx$hobby.$t;
+                    klon.querySelector("#pet").textContent += person.gsx$kaeledyr.$t;
+                    container.appendChild(klon)
+                }
+            })
+        }
+
+
+        function addListenersToButtons() {
+            document.querySelectorAll(".filter").forEach(elm => {
+                elm.addEventListener("click", filtrering);
+            })
+        }
+
+        function filtrering() {
+            console.log("filter");
+            filter = this.dataset.køn;
+            visPerson();
+            document.querySelector(".valgt").classList.remove("valgt");
+            this.classList.add("valgt");
+            document.querySelector("h1").textContent = this.textContent;
+        }
+
+    </script>
+</body>
+
+</html>
